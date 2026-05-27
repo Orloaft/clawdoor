@@ -11,7 +11,7 @@ This folder is the local runbook for the personal OpenClaw gateway on this lapto
 - Gateway auth: token
 - Workspace: `/home/orlovboros/projects`
 - Telegram route: `telegram -> codex-dev`
-- Primary model: `openai/gpt-5.5`
+- Primary model: `openai-codex/gpt-5.5`
 - Fallback model: `anthropic/claude-opus-4-7`
 - Agents:
   - `main`
