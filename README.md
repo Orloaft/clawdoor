@@ -10,14 +10,15 @@ This folder is the local runbook for the personal OpenClaw gateway on this lapto
 - Gateway bind: loopback only
 - Gateway auth: token
 - Workspace: `/home/orlovboros/projects`
-- Telegram route: `telegram -> codex-dev`
+- Telegram route: toggle via [`./scripts/telegram-agent`](scripts/telegram-agent) (`codex-dev` or `opus-main`)
 - Primary model: `openai-codex/gpt-5.5`
 - Fallback model: `anthropic/claude-haiku-4-5` (avoids accidental opus burn)
 - Compaction model: `ollama/llama3.1:8b` (local, zero API cost)
 - Agents:
   - `main`
-  - `codex-dev`
-  - `claude-review` (`anthropic/claude-opus-4-7`)
+  - `codex-dev` (`openai-codex/gpt-5.5`)
+  - `opus-main` (`anthropic/claude-opus-4-7`) — general Telegram lane when Codex is rate-limited
+  - `claude-review` (`anthropic/claude-opus-4-7`) — opus reviewer for TIB
   - `ops`
 
 ## Quick Commands
@@ -27,7 +28,10 @@ This folder is the local runbook for the personal OpenClaw gateway on this lapto
 ./scripts/login-models.sh
 TELEGRAM_BOT_TOKEN='123:abc' ./scripts/connect-telegram.sh
 ./scripts/approve-telegram.sh <PAIRING_CODE>
-./scripts/mount-ollama-ssd        # remount the ollama model image after SSD replug
+./scripts/mount-ollama-ssd         # remount the ollama model image after SSD replug
+./scripts/telegram-agent           # show current Telegram target
+./scripts/telegram-agent opus      # route Telegram to opus-main
+./scripts/telegram-agent codex     # route Telegram to codex-dev
 ```
 
 ## Phone Workflow

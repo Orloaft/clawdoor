@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Flip the Telegram binding between codex-dev (gpt-5.5) and opus-main (opus-4-7).
+# Useful when one provider hits its rate limit or weekly quota.
+#
+# Usage:
+#   telegram-agent          # show current target
+#   telegram-agent opus     # route Telegram to opus-main
+#   telegram-agent codex    # route Telegram to codex-dev
+set -e
+
+CMD="${1:-status}"
+
+show() {
+  local cur
+  cur="$(openclaw config get bindings.0.agentId 2>/dev/null | tr -d '"')"
+  case "$cur" in
+    codex-dev) echo "telegram -> codex-dev (openai-codex/gpt-5.5)";;
+    opus-main) echo "telegram -> opus-main (anthropic/claude-opus-4-7)";;
+    *)         echo "telegram -> ${cur:-unknown}";;
+  esac
+}
+
+flip_to() {
+  local target="$1"
+  openclaw config set bindings.0.agentId "$target" > /dev/null
+  systemctl --user restart openclaw-gateway.service
+  sleep 2
+  show
+}
+
+case "$CMD" in
+  status)  show ;;
+  opus)    flip_to opus-main ;;
+  codex)   flip_to codex-dev ;;
+  *)       echo "usage: $(basename "$0") [opus|codex|status]"; exit 1 ;;
+esac
