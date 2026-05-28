@@ -12,7 +12,8 @@ This folder is the local runbook for the personal OpenClaw gateway on this lapto
 - Workspace: `/home/orlovboros/projects`
 - Telegram route: `telegram -> codex-dev`
 - Primary model: `openai-codex/gpt-5.5`
-- Fallback model: `anthropic/claude-opus-4-7`
+- Fallback model: `anthropic/claude-haiku-4-5` (avoids accidental opus burn)
+- Compaction model: `ollama/llama3.1:8b` (local, zero API cost)
 - Agents:
   - `main`
   - `codex-dev`
@@ -26,6 +27,7 @@ This folder is the local runbook for the personal OpenClaw gateway on this lapto
 ./scripts/login-models.sh
 TELEGRAM_BOT_TOKEN='123:abc' ./scripts/connect-telegram.sh
 ./scripts/approve-telegram.sh <PAIRING_CODE>
+./scripts/mount-ollama-ssd        # remount the ollama model image after SSD replug
 ```
 
 ## Phone Workflow
@@ -35,3 +37,10 @@ connect the token on the laptop, DM the bot from your phone, approve the pairing
 code on the laptop, then send work requests from Telegram.
 
 Keep the bot private. Do not add it to public groups.
+
+## Token Optimization
+
+Compaction runs on a local ollama model (`llama3.1:8b`) on a portable SSD, and
+the fallback chain drops to Claude Haiku instead of Opus. See
+[docs/token-optimization.md](docs/token-optimization.md) for the audit findings,
+exact config paths, the ext4-loop-on-exFAT rationale, and the SSD replug workflow.
