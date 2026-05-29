@@ -1,11 +1,12 @@
 # TIB Feature Task
 
 Use this when asking the Telegram agent to implement gameplay or UI work in
-`/home/orlovboros/projects/tib`.
+`/mnt/nxt-dev/tib`.
 
 ## Instruction
 
-Work in `/home/orlovboros/projects/tib`.
+Work in `/mnt/nxt-dev/tib` (canonical TIB checkout on the mounted NXT SSD; the
+`/home/orlovboros/projects/tib` copy is stale).
 
 Goal:
 

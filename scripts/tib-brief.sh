@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-tib_dir="/home/orlovboros/projects/tib"
+# Canonical TIB checkout lives on the mounted NXT SSD; the projects/tib copy is stale.
+tib_dir="${TIB_DIR:-/mnt/nxt-dev/tib}"
 downloads="/home/orlovboros/Downloads"
 
 echo "== TIB Git =="

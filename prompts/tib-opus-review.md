@@ -4,7 +4,8 @@ Use this to ask the Claude Opus lane to review a Codex change.
 
 ## Instruction
 
-Review the latest TIB changes in `/home/orlovboros/projects/tib`.
+Review the latest TIB changes in `/mnt/nxt-dev/tib` (canonical TIB checkout on
+the mounted NXT SSD; the `/home/orlovboros/projects/tib` copy is stale).
 
 Focus on:
 

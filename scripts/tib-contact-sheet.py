@@ -5,7 +5,8 @@ from pathlib import Path
 
 
 def main() -> int:
-    folder = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/home/orlovboros/projects/tib/assetsources/inbox")
+    # Canonical TIB checkout lives on the mounted NXT SSD; the projects/tib copy is stale.
+    folder = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/mnt/nxt-dev/tib/assetsources/inbox")
     folder = folder.expanduser().resolve()
     if not folder.exists():
         print(f"Folder does not exist: {folder}", file=sys.stderr)

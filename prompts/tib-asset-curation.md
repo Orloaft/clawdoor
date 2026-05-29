@@ -5,12 +5,15 @@ Use this when asking the Telegram agent to process generated images from
 
 ## Instruction
 
+Work in `/mnt/nxt-dev/tib` (canonical TIB checkout on the mounted NXT SSD; the
+`/home/orlovboros/projects/tib` copy is stale).
+
 Work with:
 
 - Source downloads: `/home/orlovboros/Downloads`
-- Project: `/home/orlovboros/projects/tib`
-- Asset sources: `/home/orlovboros/projects/tib/assetsources`
-- Runtime assets: `/home/orlovboros/projects/tib/public`
+- Project: `/mnt/nxt-dev/tib`
+- Asset sources: `/mnt/nxt-dev/tib/assetsources`
+- Runtime assets: `/mnt/nxt-dev/tib/public`
 
 Goal:
 

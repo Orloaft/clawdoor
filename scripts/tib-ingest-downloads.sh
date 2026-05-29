@@ -4,7 +4,8 @@ set -euo pipefail
 days="${1:-14}"
 date_stamp="$(date +%F)"
 downloads="/home/orlovboros/Downloads"
-tib_dir="/home/orlovboros/projects/tib"
+# Canonical TIB checkout lives on the mounted NXT SSD; the projects/tib copy is stale.
+tib_dir="${TIB_DIR:-/mnt/nxt-dev/tib}"
 dest="$tib_dir/assetsources/inbox/$date_stamp"
 manifest="$dest/manifest.tsv"
 

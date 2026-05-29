@@ -8,20 +8,17 @@ TIB is the first optimized target for the phone-controlled OpenClaw workflow.
 - `claude-review`: use Opus for architecture, risk, performance, and game-design review.
 - `ops`: run builds, checks, repo summaries, and asset-processing scripts.
 
-## First Safety Fix
+## Canonical Checkout
 
-Before heavy agent work, make `/home/orlovboros/projects/tib` its own git repo.
-Right now `git -C /home/orlovboros/projects/tib` resolves to
-`/home/orlovboros/projects`, which makes sibling projects appear as untracked
-files. That is too noisy for autonomous commits.
+All TIB work happens in `/mnt/nxt-dev/tib`, the canonical checkout on the
+mounted NXT SSD. The `/home/orlovboros/projects/tib` copy is stale — do not
+work there. `/mnt/nxt-dev/tib` is its own git repo, so `git -C /mnt/nxt-dev/tib`
+resolves correctly and autonomous commits stay clean.
 
-Recommended command:
+Scripts default to this path and honor a `TIB_DIR` override:
 
 ```bash
-cd /home/orlovboros/projects/tib
-git init
-git add README.md package.json package-lock.json src server public data assetsources
-git commit -m "Initial TIB project snapshot"
+TIB_DIR=/mnt/nxt-dev/tib clawdoor/scripts/tib-brief.sh
 ```
 
 ## Daily Loop
