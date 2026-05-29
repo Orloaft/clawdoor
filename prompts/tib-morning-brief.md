@@ -4,7 +4,7 @@ Use this before leaving the laptop for the day.
 
 ## Instruction
 
-Work in `/home/orlovboros/projects/tib`.
+Work in `/mnt/nxt-dev/tib` (canonical TIB checkout on the mounted NXT SSD; the `/home/orlovboros/projects/tib` copy is stale).
 
 Prepare a concise production brief:
 
