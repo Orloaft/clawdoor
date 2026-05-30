@@ -4,7 +4,7 @@ set -euo pipefail
 apply=false
 restart=false
 notify_chat=""
-max_tokens=85000
+max_tokens=240000
 max_ratio=90
 openclaw_home="${OPENCLAW_HOME:-$HOME/.openclaw}"
 
