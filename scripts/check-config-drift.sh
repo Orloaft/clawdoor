@@ -75,12 +75,17 @@ while IFS= read -r path; do
   fi
 done < <(jq -r 'paths(type != "object") | select(all(.[]; type == "string")) | join(".")' "$BASELINE")
 
-# claude-review must stay pinned to Opus (cross-family review lane).
-review_model="$(openclaw config get agents.list 2>/dev/null \
-  | jq -r '.[] | select(.id == "claude-review") | .model.primary // "unset"')"
-if [[ "$review_model" != "anthropic/claude-opus-4-8" ]]; then
-  drift+=("claude-review model.primary: expected anthropic/claude-opus-4-8, live ${review_model:-unset}")
-fi
+# Per-agent model pins that must not drift.
+check_agent_pin() {
+  local agent="$1" want="$2" live
+  live="$(openclaw config get agents.list 2>/dev/null \
+    | jq -r --arg a "$agent" '.[] | select(.id == $a) | .model.primary // "unset"')"
+  if [[ "$live" != "$want" ]]; then
+    drift+=("${agent} model.primary: expected ${want}, live ${live:-unset}")
+  fi
+}
+check_agent_pin claude-review anthropic/claude-opus-4-8   # cross-family review lane
+check_agent_pin opus-main     anthropic/claude-fable-5    # Telegram fable lane (since 2026-06-10)
 
 if ((${#drift[@]} == 0)); then
   echo "Config matches baseline."

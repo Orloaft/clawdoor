@@ -27,7 +27,7 @@ This folder is the local runbook for the personal OpenClaw gateway on this lapto
   - `main` — no model override (inherits the gpt-5.5 → haiku default)
   - `manager` (`openai/gpt-5.5`) — prepared orchestrator lane, not bound to Telegram yet
   - `codex-dev` (`openai/gpt-5.5`)
-  - `opus-main` (`anthropic/claude-opus-4-8`, **no fallback**) — Telegram lane via `opus-telegram` account
+  - `opus-main` (`anthropic/claude-fable-5`, alias `fable`, **no fallback**) — Telegram lane via `opus-telegram` account; switched from opus-4-8 on 2026-06-10
   - `claude-review` (`anthropic/claude-opus-4-8`) — opus reviewer for TIB (pinned by `apply-baseline.sh`)
   - `ops` — no model override (inherits the default)
 
