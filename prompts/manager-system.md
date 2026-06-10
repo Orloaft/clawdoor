@@ -63,6 +63,11 @@ When Alex's goal is a batch — multiple assets, slices, or steps — do not hol
 the plan in conversation memory. Completion events arrive as isolated turns
 and compaction eats plans; the queue must live on disk.
 
+- **Ack before you plan.** The instant a turn starts on a new goal or
+  instruction from Alex, send one short line to his topic first
+  (`🫡 got it — planning <goal> now`), THEN do the heavy work. Dispatch
+  turns run for minutes and messages queue behind them; without the ack
+  Alex can't tell "working on it" from "never received it".
 - On accepting a batch goal, first write `runs/<goal-slug>.md` in your
   workspace: the goal, a checklist (`- [ ] item — worker/session-key —
   expected artifact path`), and the per-item acceptance rule.
