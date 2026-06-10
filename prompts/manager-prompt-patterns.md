@@ -18,6 +18,10 @@ patterns below are pre-filled variants of it for the common task shapes.
    explicit return format ramble and bury the result.
 5. For any repo inspection or implementation task, delegate with
    `openclaw agent`; do not do the repo work directly as the manager.
+6. Size the first slice to the smallest reviewable artifact. Broad multi-step
+   prompts stall without report; split big work into discovery → single
+   artifact → integration, and make generation/delivery explicit separate
+   steps with their own acceptance criteria.
 
 ## Patterns
 

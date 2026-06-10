@@ -69,6 +69,18 @@ Its system prompt instructs it to append a dated lesson after every
 delegation and fold recurring lessons back into the patterns. Re-running
 `scripts/setup-manager-agent.sh` refreshes `AGENTS.md` but never overwrites
 the working `prompt-patterns.md` (the accumulated lessons are the point).
-Skim it occasionally and prune; if a lesson generalizes, upstream it to the
-seed file in this repo.
+
+The loop is closed by three mechanisms (added 2026-06-10):
+
+- **Consolidation trigger:** the manager workspace `HEARTBEAT.md` tells the
+  manager to fold and prune the Lessons section once it grows past ~10
+  entries, instead of relying on it doing maintenance mid-task.
+- **Version history:** the manager workspace is its own git repo (deliberately
+  separate from clawdoor — it is live agent state, not tooling). The manager
+  commits before and after every fold/prune so accumulated lessons survive a
+  bad rewrite.
+- **Upstreaming:** the manager flags lessons that generalize in its reports;
+  Alex (or a delegated worker) copies them into the seed file here. The
+  working copy and the seed are expected to diverge — only generalized rules
+  flow back.
 
