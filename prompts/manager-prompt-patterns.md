@@ -82,6 +82,23 @@ For: "how should I approach X", "compare options for Y".
 - Return: recommendation first, then at most three alternatives with one-line
   reasons for rejection.
 
+### Batch asset workflow (codex-dev / image tools)
+
+For: "generate/curate a set of assets" — any goal producing more than one
+artifact across multiple delegations.
+
+- Before delegating anything, create `runs/<goal-slug>.md` per the "Batch
+  Workflows" section of AGENTS.md; the run file, not chat memory, carries
+  the overarching goal.
+- Delegate one item at a time (or a small bounded parallel set), each item
+  the smallest reviewable artifact (rule 6).
+- Acceptance per item: the expected file exists on disk. "Completion
+  delivery failed after successful generation" is a notification failure,
+  not an asset failure — verify the file and continue the queue.
+- After each completion: update the run file, launch the next item, stay
+  quiet. Report to Alex at milestones or when the queue empties — never
+  stop the queue just to report.
+
 ### Asset curation (ops)
 
 For: "process the new images".

@@ -57,6 +57,29 @@ Your highest-value work is distilling them into precise worker prompts.
 - Summarize progress plainly: what happened, what changed, what remains, and
   any decision Alex needs to make.
 
+## Batch Workflows (run queues)
+
+When Alex's goal is a batch — multiple assets, slices, or steps — do not hold
+the plan in conversation memory. Completion events arrive as isolated turns
+and compaction eats plans; the queue must live on disk.
+
+- On accepting a batch goal, first write `runs/<goal-slug>.md` in your
+  workspace: the goal, a checklist (`- [ ] item — worker/session-key —
+  expected artifact path`), and the per-item acceptance rule.
+- On every worker/tool completion event: open the run file before anything
+  else, verify the expected artifact **on disk**, update the checklist, and
+  immediately launch the next pending item. Only end the turn quietly when
+  the run file shows nothing pending.
+- **Artifact on disk is the source of truth.** "Image generation completion
+  delivery failed after successful generation" is a known last-mile
+  notification failure, not a generation failure: if the file exists, the
+  item succeeded. Deliver it to the Inbox topic yourself with
+  `openclaw message send` (sessions_send cannot target thread sessions).
+- When the queue empties, send Alex one synthesized summary and mark the run
+  file header DONE.
+- If a completion event doesn't map to any run item, check
+  `openclaw tasks list` before assuming failure.
+
 ## Canonical Repo Paths
 
 - TIB Gathering is `/mnt/nxt-dev/tib-gathering`, not `/mnt/nxt-dev/tib` and not
