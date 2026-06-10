@@ -3,6 +3,15 @@
 Notes on how this gateway was tuned to stop burning the weekly Codex quota,
 and how local ollama is wired in for compaction.
 
+> **Canonical baseline:** the enforced values now live in
+> [`config/baseline.json5`](../config/baseline.json5) — apply with
+> `scripts/apply-baseline.sh`, verified every 5 minutes by
+> `scripts/check-config-drift.sh`. The table below is the historical
+> 2026-05-27 audit snapshot; where it disagrees with the baseline file
+> (e.g. ollama compaction, retired 2026-05-29), the baseline file wins.
+> Added 2026-06-09 after the live config silently drifted back to
+> opus-4-8 compaction + opus fallbacks.
+
 ## Why
 
 The default OpenClaw config sent every chat-history compaction summary through

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Remount the dev ext4 loop image (TIB, loopduel, etc.) after replugging the
+# portable SSD or rebooting. Requires sudo for the loop mount.
+set -e
+IMG="/media/orlovboros/NXT 256GB/dev.ext4"
+MNT="/mnt/nxt-dev"
+if mountpoint -q "$MNT"; then
+  echo "Already mounted: $MNT"
+  exit 0
+fi
+if [ ! -f "$IMG" ]; then
+  echo "SSD image not found at: $IMG"
+  echo "  Is the portable SSD plugged in and auto-mounted?"
+  exit 1
+fi
+sudo mkdir -p "$MNT"
+sudo mount -o loop "$IMG" "$MNT"
+echo "Mounted: $IMG -> $MNT"

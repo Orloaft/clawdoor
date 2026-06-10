@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Flip the Telegram binding between codex-dev (gpt-5.5) and opus-main (opus-4-7).
+# Flip the default Telegram binding between codex-dev and opus-main.
 # Useful when one provider hits its rate limit or weekly quota.
 #
 # Usage:
@@ -15,7 +15,7 @@ show() {
   cur="$(openclaw config get bindings.0.agentId 2>/dev/null | tr -d '"')"
   case "$cur" in
     codex-dev) echo "telegram -> codex-dev (openai-codex/gpt-5.5)";;
-    opus-main) echo "telegram -> opus-main (anthropic/claude-opus-4-7)";;
+    opus-main) echo "telegram -> opus-main (anthropic/claude-opus-4-8)";;
     *)         echo "telegram -> ${cur:-unknown}";;
   esac
 }
