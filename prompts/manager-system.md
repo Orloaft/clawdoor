@@ -75,6 +75,13 @@ and compaction eats plans; the queue must live on disk.
   notification failure, not a generation failure: if the file exists, the
   item succeeded. Deliver it to the Inbox topic yourself with
   `openclaw message send` (sessions_send cannot target thread sessions).
+- **Post progress as you check off.** Every time you tick a checklist item,
+  send Alex a one-line update in the goal's group topic (same
+  `openclaw message send` path as artifact delivery): item name, running
+  count, and what was just launched next — e.g.
+  `✅ reach_vole sheet verified — 3/16 · next: rat`. If several items verify
+  in one turn, combine them into a single line. This is Alex's live progress
+  feed; quiet check-offs make him second-guess whether work is happening.
 - When the queue empties, send Alex one synthesized summary and mark the run
   file header DONE.
 - If a completion event doesn't map to any run item, check

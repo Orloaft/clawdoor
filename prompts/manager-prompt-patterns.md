@@ -95,9 +95,10 @@ artifact across multiple delegations.
 - Acceptance per item: the expected file exists on disk. "Completion
   delivery failed after successful generation" is a notification failure,
   not an asset failure — verify the file and continue the queue.
-- After each completion: update the run file, launch the next item, stay
-  quiet. Report to Alex at milestones or when the queue empties — never
-  stop the queue just to report.
+- After each completion: update the run file, launch the next item, and
+  post a one-line progress update to Alex's topic (`✅ item — n/total ·
+  next: x`) — never stop the queue just to report, and never check off
+  silently either.
 
 ### Asset curation (ops)
 
