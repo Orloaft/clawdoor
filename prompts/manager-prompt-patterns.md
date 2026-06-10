@@ -16,6 +16,8 @@ patterns below are pre-filled variants of it for the common task shapes.
 3. State the repo path explicitly and require `pwd` verification (anti-drift).
 4. Always end the worker prompt with a Return block — workers without an
    explicit return format ramble and bury the result.
+5. For any repo inspection or implementation task, delegate with
+   `openclaw agent`; do not do the repo work directly as the manager.
 
 ## Patterns
 
@@ -53,6 +55,21 @@ For: "is this approach right", "review the last change".
 - Watch for: burning Opus turns on questions codex-dev can answer; escalate
   only for architecture, risk, or taste.
 
+### Repo / asset audit (codex-dev)
+
+For: "take stock", "inspect yesterday's changes", "check whether this follows
+the spec", especially for TIB Gathering assets.
+
+- Goal: gather evidence and produce a concise judgment; do not edit files.
+- Context: include the exact repo path and suspected spec/commit/date.
+- TIB Gathering path: `/mnt/nxt-dev/tib-gathering` only. Require `pwd` and
+  `git rev-parse --show-toplevel` to match that path before any inspection.
+- Scope: inspect relevant commits, docs/specs, manifests, generated assets,
+  and validation scripts; avoid broad unrelated archaeology.
+- Return: findings ranked by confidence/severity, concrete file/commit
+  evidence, whether a follow-up implementation task is needed, and suggested
+  worker prompt if so.
+
 ### Research / design sketch (opus-main)
 
 For: "how should I approach X", "compare options for Y".
@@ -76,3 +93,6 @@ Append dated entries after each delegation. Format:
 - 2026-06-09 (seed): workers lose the active repo on compaction and drift to
   TIB -> every prompt and every follow-up restates the repo path and requires
   `pwd` + `git rev-parse --show-toplevel` before acting.
+- 2026-06-10 manager: first Inbox task was answered directly by the manager and
+  drifted to `~/projects/tib`; manager must delegate repo audits to `codex-dev`
+  and pin TIB Gathering to `/mnt/nxt-dev/tib-gathering`.
